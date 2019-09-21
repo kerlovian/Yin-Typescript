@@ -1,0 +1,44 @@
+
+
+### -----------------------------------------------------------------------
+### SECTION <"General">:
+
+## Node:
+package-lock.json
+
+## NPM:
+node_modules/
+npm-debug.log*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+# ^Diagnostic reports (https://nodejs.org/api/report.html)
+
+## Workspace:
+.idea/
+**.iml
+
+## ///
+## /// END <"General">
+## ///
+
+
+### -----------------------------------------------------------------------
+### SECTION <"Project specific">:
+
+## Logs:
+logs
+*.log
+
+## Tests:
+test/
+
+## Configs:
+config/**/*.json
+!config/**/*.template.json
+# ^Keep template configs
+
+## ///
+## /// END <"Project specific">
+## ///
+
+
+### -----------------------------------------------------------------------

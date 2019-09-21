@@ -1,0 +1,10 @@
+{
+  "token": "bot's auth token",
+  "ownerID": "bot owner's user ID",
+  "prefix": "bot's default prefix",
+  
+  "channels": {
+    "logs": "channel ID to send logs to",
+    "errors": "channel ID to send errors to"
+  }
+}
