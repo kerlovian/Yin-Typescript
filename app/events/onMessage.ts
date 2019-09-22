@@ -24,7 +24,7 @@ export default class onMessage extends EventHandler {
 
 
         if (command.checkPermissions(message)) {
-            const parser = command.argParser || /\S+/;
+            const parser = command.argParser || /\S+/g;
 
             const args = prefixRemoved.slice(commandName.length).trim().match(parser);
             command.run(message, ...args || "");
