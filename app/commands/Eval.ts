@@ -18,7 +18,7 @@ export default class Eval extends Command {
         return message.author!.id === this.client.config.ownerID;
     }
 
-    public async run (message: Message, args: string) {
+    public async run (message: Message, [code]: string[]) {
         const precontext = '' +
             '"use strict";\n' +
             'console.log("hello from inside eval function");\n' +
@@ -34,7 +34,7 @@ export default class Eval extends Command {
             ');\n';
 
         try {
-            new Function(`${(precontext)}\n${args}\n${postcontext}`)()(message, this.client);
+            new Function(`${(precontext)}\n${code}\n${postcontext}`)()(message, this.client);
         } catch (err) {
             message.channel.send("2. External error during evaluation: " + err);
         }

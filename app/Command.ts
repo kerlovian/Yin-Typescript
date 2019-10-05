@@ -14,5 +14,5 @@ export default abstract class Command {
 
     public abstract checkPermissions (message: Message): boolean;
 
-    public abstract async run (message: Message, ...args: string[]): Promise<any>;
+    public abstract async run (message: Message, args: string[]): Promise<any>;
 }
