@@ -20,24 +20,31 @@ export default class Eval extends Command {
     public async run (message: Message, args: string[]) {
         const [code] = args;
 
-        const precontext = '' +
+        try {
+            Eval.createFunction(code)(message, this.client);
+        } catch (err) {
+            message.channel.send("2. External error during evaluation: " + err);
+        }
+    }
+
+
+    private static createFunction (code: string): Function {
+        return new Function(Eval.wrap(code))();
+    }
+
+    private static wrap (code: string): string {
+        return '' +
             '"use strict";\n' +
             'console.log("hello from inside eval function");\n' +
             'return(\n' +
             '    async (message, client) => {\n' +
-            '        try {';
-        const postcontext = '' +
+            '        try {' +
+            `\n${code}\n` +
             '        } catch (err) {\n' +
             '            console.log(err);\n' +
             '            message.channel.send("1. Internal error during evaluation: " + err);\n' +
             '        }\n' +
             '    }\n' +
             ');\n';
-
-        try {
-            new Function(`${(precontext)}\n${code}\n${postcontext}`)()(message, this.client);
-        } catch (err) {
-            message.channel.send("2. External error during evaluation: " + err);
-        }
     }
 }
