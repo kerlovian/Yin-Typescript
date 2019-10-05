@@ -8,6 +8,7 @@ export default abstract class Command {
     public aliases?: string[];
     public argParser?: RegExp;
 
+
     protected constructor (client: BotClient) {
         this.client = client;
     }

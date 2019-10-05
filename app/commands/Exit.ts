@@ -8,6 +8,7 @@ export default class Exit extends Command {
     public name: string = "exit";
     public argParser: RegExp = /^\b$/; //matches none
 
+
     public constructor (client: BotClient) {
         super(client);
     }

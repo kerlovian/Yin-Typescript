@@ -9,7 +9,6 @@ export default class Eval extends Command {
     public argParser: RegExp = /[\s\S]*/; //matches all
 
 
-
     public constructor (client: BotClient) {
         super(client);
     }
@@ -18,7 +17,9 @@ export default class Eval extends Command {
         return message.author!.id === this.client.config.ownerID;
     }
 
-    public async run (message: Message, [code]: string[]) {
+    public async run (message: Message, args: string[]) {
+        const [code] = args;
+
         const precontext = '' +
             '"use strict";\n' +
             'console.log("hello from inside eval function");\n' +
