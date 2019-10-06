@@ -18,7 +18,7 @@ export default class Exit extends Command {
     }
 
     public async run (message: Message) {
-        await message.react("✅");
+        await Command.success(message);
         this.client.destroy();
         this.client.signale.fav("CLIENT DESTROYED... Exiting program");
     }
