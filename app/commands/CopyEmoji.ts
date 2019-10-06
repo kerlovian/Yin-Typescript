@@ -1,0 +1,25 @@
+import Command from "../Command";
+import BotClient from "../BotClient";
+
+import { Message } from "discord.js";
+
+
+export default class CopyEmoji extends Command {
+    public name: string = "copyemoji";
+
+
+    constructor (client: BotClient) {
+        super(client);
+    }
+
+    public checkPermissions (message: Message): boolean {
+        return message.author!.id === this.client.config.ownerID;
+    }
+
+    public async run (message: Message, args: string[]) {
+        const [id, name] = args;
+
+        const emoji = await message.guild!.emojis.create("https://cdn.discordapp.com/emojis/" + id + ".png?v=1", name);
+        return Command.success(message, `Emoji \`${name}\` created (<:${name}:${emoji.id}>)`);
+    }
+}
