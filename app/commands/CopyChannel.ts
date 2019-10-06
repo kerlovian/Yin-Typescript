@@ -26,11 +26,16 @@ export default class CopyChannel extends Command {
         if (!name) return Command.fail(message, "no specified name");
 
         const perms = ch.permissionOverwrites;
-        const createdChannel = await message.guild!.channels.create(name.join("-"), {
+        const createdChannel = await message.guild!.channels.create(name.join(" "), {
             type: type as "category" || "text" || "voice",
             permissionOverwrites: perms
         });
 
-        return Command.success(message, `Channel <#${createdChannel.id}> created`);
+        const createdChannelMention = (type === "text")
+            ? `<#${createdChannel.id}>`
+            : createdChannel.name;
+        const createdChannelType = type.slice(0, 1).toUpperCase() + type.slice(1) + "Channel";
+
+        return Command.success(message, `${createdChannelType} ${createdChannelMention} created`);
     }
 }
