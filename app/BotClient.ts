@@ -5,18 +5,21 @@ import fs from "fs-extra";
 import Command from "./Command";
 import EventHandler from "./EventHandler";
 import { BotConfig } from "../config";
+import * as util from "./Utils";
 
 
 export default class BotClient extends Discord.Client {
     public commands: Map<string | undefined, Command>;
     public aliases: Map<string | undefined, string>;
     public config: typeof BotConfig;
+    public Utils: typeof util;
     public signale: Signale.Signale;
 
 
     public constructor (options?: Discord.ClientOptions) {
         super(options);
         this.config = BotConfig;
+        this.Utils = util;
 
         this.commands = new Map();
         this.aliases = new Map();
