@@ -2,6 +2,7 @@ import Command from "../Command";
 import BotClient from "../BotClient";
 
 import { Message } from "discord.js";
+import { ParseUtils } from "../Utils";
 
 
 export default class CopyChannel extends Command {
@@ -17,7 +18,8 @@ export default class CopyChannel extends Command {
     }
 
     public async run (message: Message, args: string[]) {
-        const [baseChannel, AS, type, TO, ...name] = args;
+        const [baseChannel_raw, AS, type, TO, ...name] = args;
+        const baseChannel = ParseUtils.MATCH_CHANNEL(baseChannel_raw);
 
         const ch = message.guild!.channels.resolve(baseChannel);
         if (!ch) return Command.Utils.fail(message, "base channel not found");

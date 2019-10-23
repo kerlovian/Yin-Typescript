@@ -2,6 +2,7 @@ import Command from "../Command";
 import BotClient from "../BotClient";
 
 import { Message } from "discord.js";
+import { ParseUtils } from "../Utils";
 
 
 export default class CopyEmoji extends Command {
@@ -17,7 +18,8 @@ export default class CopyEmoji extends Command {
     }
 
     public async run (message: Message, args: string[]) {
-        const [id, name] = args;
+        const [emoji_raw, name] = args;
+        const id = ParseUtils.MATCH_EMOJI(emoji_raw);
 
         const emoji = await message.guild!.emojis.create("https://cdn.discordapp.com/emojis/" + id + ".png?v=1", name);
         return Command.Utils.success(message, `Emoji \`${name}\` created (<:${name}:${emoji.id}>)`);
