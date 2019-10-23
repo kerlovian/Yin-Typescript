@@ -20,6 +20,6 @@ export default class CopyEmoji extends Command {
         const [id, name] = args;
 
         const emoji = await message.guild!.emojis.create("https://cdn.discordapp.com/emojis/" + id + ".png?v=1", name);
-        return Command.success(message, `Emoji \`${name}\` created (<:${name}:${emoji.id}>)`);
+        return Command.Utils.success(message, `Emoji \`${name}\` created (<:${name}:${emoji.id}>)`);
     }
 }

@@ -1,6 +1,8 @@
 import BotClient from "./BotClient";
 import { Message } from "discord.js";
 
+import { CommandUtils } from "./Utils";
+
 
 export default abstract class Command {
     public client: BotClient;
@@ -17,14 +19,5 @@ export default abstract class Command {
 
     public abstract async run (message: Message, args: string[]): Promise<any>;
 
-
-    public static async success (message: Message, response?: any) {
-        await message.react("✅");
-        if (response) await message.channel.send(response);
-    }
-
-    public static async fail (message: Message, response?: any) {
-        await message.react("❌");
-        if (response) await message.channel.send(response);
-    }
+    protected static Utils = CommandUtils;
 }
