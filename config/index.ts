@@ -1,11 +1,5 @@
-export const BotConfig: BotConfigTyping = require("./bot-config.json");
+import * as BotConfig from "./bot-config.json";
 
-interface BotConfigTyping {
-    token: string,
-    ownerID: string,
-    prefix: string,
-    channels: {
-        logs: string,
-        errors: string,
-    },
+export {
+    BotConfig,
 }

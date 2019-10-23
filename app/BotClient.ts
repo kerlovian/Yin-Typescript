@@ -10,12 +10,7 @@ import { BotConfig } from "../config";
 export default class BotClient extends Discord.Client {
     public commands: Map<string | undefined, Command>;
     public aliases: Map<string | undefined, string>;
-    public config: {
-        token: string, ownerID: string, prefix: string,
-        channels: {
-            logs: string, errors: string
-        }
-    };
+    public config: typeof BotConfig;
     public signale: Signale.Signale;
 
 
