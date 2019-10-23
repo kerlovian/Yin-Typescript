@@ -2,7 +2,7 @@ import Command from "../Command";
 import BotClient from "../BotClient";
 
 import { Message } from "discord.js";
-import { ParseUtils } from "../Utils";
+import { MentionUtils, ParseUtils } from "../Utils";
 
 
 export default class CopyChannel extends Command {
@@ -33,9 +33,7 @@ export default class CopyChannel extends Command {
             permissionOverwrites: perms
         });
 
-        const createdChannelMention = (type === "text")
-            ? `<#${createdChannel.id}>`
-            : createdChannel.name;
+        const createdChannelMention = MentionUtils.MENTION_CHANNEL(createdChannel);
         const createdChannelType = type.slice(0, 1).toUpperCase() + type.slice(1) + "Channel";
 
         return Command.Utils.success(message, `${createdChannelType} ${createdChannelMention} created`);
