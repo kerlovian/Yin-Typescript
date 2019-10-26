@@ -1,4 +1,4 @@
-import { Channel, DMChannel, GuildEmoji, GuildMember, Role, User, VoiceChannel } from "discord.js";
+import { CategoryChannel, Channel, DMChannel, GuildEmoji, GuildMember, Role, User, VoiceChannel } from "discord.js";
 
 
 export default abstract class MentionUtils {
@@ -27,8 +27,9 @@ export default abstract class MentionUtils {
             case "text":
                 return `<#${channel.id}>`;
             case "category":
+                return "`" + (channel as CategoryChannel).name.toUpperCase() + "`";
             case "voice":
-                return (channel as VoiceChannel).name;
+                return "`\\🔊" + (channel as VoiceChannel).name + "`";
             case "dm":
                 return (channel as DMChannel).recipient.tag;
             default:
