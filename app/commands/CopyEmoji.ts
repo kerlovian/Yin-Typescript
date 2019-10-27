@@ -10,7 +10,7 @@ export default class CopyEmoji extends Command {
 
 
     constructor (client: BotClient) {
-        super(client);
+        super(client, __filename);
     }
 
     public checkPermissions (message: Message): boolean {

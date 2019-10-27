@@ -6,13 +6,15 @@ import { CommandUtils } from "./Utils";
 
 export default abstract class Command {
     public client: BotClient;
+    public readonly filePath: string;
     public abstract name: string;
     public aliases?: string[];
     public argParser?: RegExp;
 
 
-    protected constructor (client: BotClient) {
+    protected constructor (client: BotClient, filePath: string) {
         this.client = client;
+        this.filePath = filePath;
     }
 
     public abstract checkPermissions (message: Message): boolean;

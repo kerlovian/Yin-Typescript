@@ -10,7 +10,7 @@ export default class Exit extends Command {
 
 
     public constructor (client: BotClient) {
-        super(client);
+        super(client, __filename);
     }
 
     public checkPermissions (message: Message): boolean {

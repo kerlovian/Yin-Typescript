@@ -19,7 +19,7 @@ export default class onMessage extends EventHandler {
         const prefixRemoved = message.content.slice(this.client.config.prefix.length);
         const commandName = prefixRemoved.toLowerCase().match(/^\S+/)![0];
 
-        const command = this.client.commands.get(commandName) || this.client.commands.get(this.client.aliases.get(commandName));
+        const command = this.client.commands.get(commandName);
         if (!command) return;
 
 
