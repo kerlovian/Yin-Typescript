@@ -72,7 +72,7 @@ export default class CommandStore extends Store<string, Command> {
 
 
     // Reloads command from Store
-    public reload (key: string): Command | undefined {
+    public reload (name: string): Command | undefined {
         const removed = this.unload(name);
         if (!removed) return undefined;
 
