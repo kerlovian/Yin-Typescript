@@ -1,5 +1,5 @@
-import Command from "../Command";
-import BotClient from "../BotClient";
+import Command from "../../Command";
+import BotClient from "../../BotClient";
 
 import { Message } from "discord.js";
 
