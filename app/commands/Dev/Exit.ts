@@ -1,5 +1,5 @@
-import Command from "../Command";
-import BotClient from "../BotClient";
+import Command from "../../Command";
+import BotClient from "../../BotClient";
 
 import { Message } from "discord.js";
 
@@ -19,7 +19,7 @@ export default class Exit extends Command {
 
     public async run (message: Message) {
         await Command.Utils.success(message);
-        this.client.destroy();
+        await this.client.destroy();
         this.client.signale.fav("CLIENT DESTROYED... Exiting program");
     }
 }

@@ -1,9 +1,10 @@
 import EventHandler from "../EventHandler";
 import BotClient from "../BotClient";
+import { Events } from "discord.js";
 
 
 export default class onReady extends EventHandler {
-    public name: string = "ready";
+    public name = Events.ClientReady;
 
     public constructor (client: BotClient) {
         super(client);

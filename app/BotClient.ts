@@ -1,6 +1,6 @@
 import Discord from "discord.js";
 import Signale from "signale";
-import fs from "fs-extra";
+import { FileUtils } from "./Utils";
 
 import { CommandStore } from "./stores";
 import EventHandler from "./EventHandler";
@@ -15,8 +15,15 @@ export default class BotClient extends Discord.Client {
     public signale: Signale.Signale;
 
 
-    public constructor (options?: Discord.ClientOptions) {
-        super(options);
+    public constructor () {
+        super({
+            intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMembers,
+                Discord.GatewayIntentBits.GuildModeration, Discord.GatewayIntentBits.GuildEmojisAndStickers,
+                Discord.GatewayIntentBits.GuildIntegrations, Discord.GatewayIntentBits.GuildInvites,
+                Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.GuildMessageReactions,
+                Discord.GatewayIntentBits.DirectMessages, Discord.GatewayIntentBits.DirectMessageReactions,
+                Discord.GatewayIntentBits.MessageContent],
+            partials: [Discord.Partials.Channel] });
         this.config = BotConfig;
         this.Utils = util;
         this.commands = new CommandStore(this);
@@ -46,8 +53,8 @@ export default class BotClient extends Discord.Client {
     public async loadCommands () {
         this.signale.pending("$ Loading commands...");
 
-        const commandFiles = await fs.readdir(__dirname + "/commands")
-            .then(files => files.filter(f => f.endsWith(".js") || f.endsWith(".ts")));
+        const commandFiles = FileUtils.walkDir(__dirname + "/commands")
+            .filter(f => f.endsWith(".js") || f.endsWith(".ts"));
         commandFiles.forEach(file => this.commands.load(file));
 
         this.signale.success("$ Finished loading commands.");
@@ -58,9 +65,10 @@ export default class BotClient extends Discord.Client {
     public async loadEvents () {
         this.signale.pending("$ Loading events...");
 
-        const eventFiles = await fs.readdir(__dirname + "/events");
+        const eventFiles = FileUtils.walkDir(__dirname + "/events")
+            .filter(f => f.endsWith(".js") || f.endsWith(".ts"));
         for (const evtFile of eventFiles) {
-            const event: EventHandler = new (require(__dirname + `/events/${evtFile}`).default)(this);
+            const event: EventHandler = new (require(evtFile).default)(this);
             this.on(event.name, (...args: any) => event.run(...args));
 
             this.signale.info(`loaded event: '${event.name}'`);
