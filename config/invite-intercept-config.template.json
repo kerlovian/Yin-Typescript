@@ -1,0 +1,41 @@
+{
+  "serverID1": {
+    "permittedRoleIDs": [
+      "adminRoleID",
+      "modRoleID",
+      "etc."
+    ],
+    "permittedUserIDs": [
+      "myUserID",
+      "serverOwnerUserID",
+      "etc."
+    ],
+    "permittedCategoryIDs": [
+      "serverInfoCategoryID",
+      "etc."
+    ],
+    "permittedChannelIDs": [
+      "announcementsChannelID",
+      "rulesChannelID",
+      "etc."
+    ],
+    "permittedServerIDs": [
+      "thisServersID",
+      "sisterServerID",
+      "etc."
+    ],
+    "permitUsersWithAdmin": true,
+    "logChannels": [
+      "botLogsChannelID",
+      "moderationLogsChannelID",
+      "etc."
+    ],
+    "askBeforeBan": true,
+    "askChannel": "moderationLogsChannelID",
+    "allowAskDenyingSelf": true,
+    "muteDuringAsk": true,
+    "muteRoleID": "mutedRoleID"
+  }
+  "serverID2": {},
+  "serverID3": {}
+}
