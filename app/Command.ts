@@ -19,6 +19,7 @@ export default abstract class Command {
 
     public abstract checkPermissions (message: Message): boolean;
 
+    // @ts-ignore
     public abstract async run (message: Message, args: string[]): Promise<any>;
 
     protected static Utils = CommandUtils;

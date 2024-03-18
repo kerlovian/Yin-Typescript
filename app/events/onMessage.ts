@@ -1,11 +1,11 @@
 import EventHandler from "../EventHandler";
 import BotClient from "../BotClient";
 
-import { Message } from "discord.js";
+import { Events, Message } from "discord.js";
 
 
 export default class onMessage extends EventHandler {
-    public name: string = "message";
+    public name = Events.MessageCreate;
 
     public constructor (client: BotClient) {
         super(client);
@@ -14,6 +14,7 @@ export default class onMessage extends EventHandler {
     public async run (message: Message) {
         if (message.author!.bot) return;
         if (!message.content.startsWith(this.client.config.prefix)) return;
+        this.client.signale.log(`reacting to '${message.content}'`);
 
 
         const prefixRemoved = message.content.slice(this.client.config.prefix.length);
@@ -27,6 +28,7 @@ export default class onMessage extends EventHandler {
             const parser = command.argParser || /\S+/g;
 
             const args = prefixRemoved.slice(commandName.length).trim().match(parser);
+            this.client.signale.log(`running command '$'{command.name}' with args: ${(args || ["(no args)"]).toString()}`);
             command.run(message, args || []);
         }
     }

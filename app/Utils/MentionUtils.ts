@@ -1,4 +1,5 @@
 import { CategoryChannel, Channel, DMChannel, GuildEmoji, GuildMember, Role, User, VoiceChannel } from "discord.js";
+import { ChannelType } from "discord-api-types/v10";
 
 
 export default abstract class MentionUtils {
@@ -6,7 +7,7 @@ export default abstract class MentionUtils {
     public static MENTION_EMOJI (emoji: GuildEmoji): string {
         return (emoji.available)
             ? `<:${emoji.name}:${emoji.id}>`
-            : emoji.name;
+            : emoji.name!;
     }
 
     //constructs raw user mention (string) from User or GuildMember
@@ -24,14 +25,14 @@ export default abstract class MentionUtils {
     //constructs raw channel mention (string) from Channel
     public static MENTION_CHANNEL (channel: Channel): string {
         switch (channel.type) {
-            case "text":
+            case ChannelType.GuildText:
                 return `<#${channel.id}>`;
-            case "category":
+            case ChannelType.GuildCategory:
                 return "`" + (channel as CategoryChannel).name.toUpperCase() + "`";
-            case "voice":
+            case ChannelType.GuildVoice:
                 return "`\\🔊" + (channel as VoiceChannel).name + "`";
-            case "dm":
-                return (channel as DMChannel).recipient.tag;
+            case ChannelType.DM:
+                return (channel as DMChannel).recipient!.tag;
             default:
                 return channel.id;
         }

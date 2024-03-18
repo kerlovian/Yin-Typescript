@@ -21,7 +21,7 @@ export default class CopyEmoji extends Command {
         const [emoji_raw, name] = args;
         const id = ParseUtils.MATCH_EMOJI(emoji_raw);
 
-        const emoji = await message.guild!.emojis.create("https://cdn.discordapp.com/emojis/" + id + ".png?v=1", name);
+        const emoji = await message.guild!.emojis.create({ attachment: "https://cdn.discordapp.com/emojis/" + id + ".png?v=1", name: name });
         const emojiMention = MentionUtils.MENTION_EMOJI(emoji);
         return Command.Utils.success(message, `Emoji \`${name}\` created (${emojiMention})`);
     }

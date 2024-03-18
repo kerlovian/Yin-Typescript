@@ -52,6 +52,7 @@ export default class CommandStore extends Store<string, Command> {
             this.client.signale.info(`loaded command: '${command.name}'`);
             return command;
         } catch (err) {
+            // @ts-ignore
             if (err.code && err.code === "MODULE_NOT_FOUND") {
                 this.client.signale.error(`error loading command: could not find command at path: '${path}'`);
                 return undefined;

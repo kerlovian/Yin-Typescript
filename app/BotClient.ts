@@ -15,8 +15,15 @@ export default class BotClient extends Discord.Client {
     public signale: Signale.Signale;
 
 
-    public constructor (options?: Discord.ClientOptions) {
-        super(options);
+    public constructor () {
+        super({
+            intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMembers,
+                Discord.GatewayIntentBits.GuildModeration, Discord.GatewayIntentBits.GuildEmojisAndStickers,
+                Discord.GatewayIntentBits.GuildIntegrations, Discord.GatewayIntentBits.GuildInvites,
+                Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.GuildMessageReactions,
+                Discord.GatewayIntentBits.DirectMessages, Discord.GatewayIntentBits.DirectMessageReactions,
+                Discord.GatewayIntentBits.MessageContent],
+            partials: [Discord.Partials.Channel] });
         this.config = BotConfig;
         this.Utils = util;
         this.commands = new CommandStore(this);

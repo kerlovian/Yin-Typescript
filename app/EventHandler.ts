@@ -9,5 +9,6 @@ export default abstract class EventHandler {
         this.client = client;
     }
 
+    // @ts-ignore
     public abstract async run (...args: any): Promise<any>;
 }
