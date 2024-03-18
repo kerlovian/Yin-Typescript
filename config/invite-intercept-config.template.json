@@ -19,12 +19,9 @@
       "rulesChannelID",
       "etc."
     ],
-    "permittedServerIDs": [
-      "thisServersID",
-      "sisterServerID",
-      "etc."
-    ],
+    "permitThisServer": true,
     "permitUsersWithAdmin": true,
+    "permitBots": true,
     "logChannels": [
       "botLogsChannelID",
       "moderationLogsChannelID",
@@ -34,8 +31,18 @@
     "askChannel": "moderationLogsChannelID",
     "allowAskDenyingSelf": true,
     "muteDuringAsk": true,
-    "muteRoleID": "mutedRoleID"
-  }
+    "muteRoleID": "mutedRoleID",
+    "decisionMakerRoleIDs": [
+      "adminRoleID",
+      "modRoleID",
+      "etc."
+    ],
+    "decisionMakerUserIDs": [
+      "myUserID",
+      "serverOwnerUserID",
+      "etc."
+    ]
+  },
   "serverID2": {},
   "serverID3": {}
 }
